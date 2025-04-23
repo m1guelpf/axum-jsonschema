@@ -1,0 +1,21 @@
+[package]
+license = "MIT"
+edition = "2024"
+version = "0.1.0"
+readme = "README.md"
+name = "axum_json_schema"
+authors = ["Miguel Piedrafita <rust@miguel.build>"]
+description = "Request JSON schema validation for axum"
+repository = "https://github.com/m1guelpf/axum-jsonschema"
+
+[dependencies]
+http = "1.0.0"
+tracing = "0.1.36"
+itertools = "0.14.0"
+serde_json = "1.0.85"
+serde_path_to_error = "0.1.8"
+serde = { version = "1.0.144", features = ["derive"] }
+schemars = { version = "0.8.10", default-features = false }
+jsonschema = { version = "0.30.0", default-features = false }
+aide = { version = "0.14", optional = true, features = ["axum-json"] }
+axum = { version = "0.8.1", default-features = false, features = ["json"] }

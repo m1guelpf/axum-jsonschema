@@ -1,7 +1,7 @@
 [package]
 license = "MIT"
 edition = "2024"
-version = "0.1.0"
+version = "0.2.0"
 readme = "README.md"
 name = "axum_json_schema"
 authors = ["Miguel Piedrafita <rust@miguel.build>"]

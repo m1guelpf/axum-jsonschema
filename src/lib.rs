@@ -14,7 +14,7 @@
 //!
 //! - aide: support for [aide](https://docs.rs/aide/latest/aide/)
 
-#![warn(clippy::pedantic, missing_docs)]
+#![warn(missing_docs)]
 #![allow(clippy::wildcard_imports)]
 use std::{
     any::{TypeId, type_name},
@@ -33,10 +33,7 @@ use jsonschema::{
     Validator,
     output::{BasicOutput, ErrorDescription, OutputUnit},
 };
-use schemars::{
-    JsonSchema,
-    r#gen::{SchemaGenerator, SchemaSettings},
-};
+use schemars::{JsonSchema, SchemaGenerator, generate::SchemaSettings};
 use serde::{Serialize, de::DeserializeOwned};
 use serde_json::{Map, Value};
 use serde_path_to_error::Segment;
@@ -182,7 +179,7 @@ impl From<JsonSchemaRejection> for JsonSchemaErrorResponse {
                         // enum is ignored because it doesn't exist in json
                         instance_location: std::iter::once(String::new())
                             .chain(s.path().iter().map(|s| match s {
-                                Segment::Map { key } => key.to_string(),
+                                Segment::Map { key } => key.clone(),
                                 Segment::Seq { index } => index.to_string(),
                                 _ => "?".to_string(),
                             }))
@@ -249,7 +246,7 @@ mod impl_aide {
         fn inferred_responses(
             ctx: &mut aide::generate::GenContext,
             operation: &mut aide::openapi::Operation,
-        ) -> Vec<(Option<u16>, aide::openapi::Response)> {
+        ) -> Vec<(Option<aide::openapi::StatusCode>, aide::openapi::Response)> {
             axum::Json::<T>::inferred_responses(ctx, operation)
         }
     }

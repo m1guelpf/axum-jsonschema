@@ -1,3 +1,5 @@
 # axum_json_schema
 
-A drop-in replacement for `Json` extractor and response that validates requests based on JSON schemas.
+A replacement for the Axum `Json` extractor and response. It uses JSON schemas to validate requests.
+
+This version supports Schemars 1.x and Axum 0.8. Enable the `aide` feature to use Aide 0.16.0-alpha.4.
